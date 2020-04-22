@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .warp {
+            border: 1px solid grey;
+            display: inline-block;
+            padding: 15px;
+            width: 370px;
+        }
+        
+        .inputbox {
+            height: 50px;
+            position: relative;
+        }
+        
+        input {
+            outline: none;
+        }
+        
+        #clear {
+            position: absolute;
+            display: none;
+            width: 32px;
+            height: 32px;
+            right: 10px;
+            top: 0;
+            margin-top: 10px;
+            line-height: 32px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        input:nth-child(1) {
+            width: 300px;
+            padding: 15px;
+            border: 1px solid grey;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        .arror {
+            display: none;
+            color: red;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+        
+        .canvasbox {
+            position: relative;
+            margin-top: 15px;
+        }
+        
+        #refresh {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            cursor: pointer;
+            display: inline-block;
+            height: 35px;
+            margin-top: -16px;
+        }
+        
+        .warp>input {
+            background-color: green;
+            padding: 10px 20px;
+            border: 0;
+            color: honeydew;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        
+        #mycanvas {
+            background-color: #3c3c3c;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="warp">
+        <div class="inputbox">
+            <input type="text" id="codearea" placeholder="请输入验证码" maxlength="6">
+            <span id="clear">X</span>
+        </div>
+        <div class="arror">输入错误</div>
+        <div class="canvasbox">
+            <canvas id="mycanvas" width="300" height="80"></canvas>
+            <span id="refresh">refresh</span>
+        </div>
+        <input type="submit" value="submit" id="submit">
+    </div>
+    <script>
+        var key = false;
+        var arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        var string = '';
+        for (let i = 65; i < 122; i++) {
+            if (i > 90 && i < 97) {
+                continue;
+            }
+            arr.push(String.fromCharCode(i));
+        }
+
+        function creatcode() {
+            var code = "";
+            for (let i = 0; i < 6; i++) {
+                var x = Math.floor(Math.random() * arr.length);
+                code += arr[x] + ' ';
+                string += arr[x]
+            }
+            return code;
+        }
+
+        function creatcanvas() {
+            var code = creatcode();
+            var canvas = document.getElementById("mycanvas");
+            var ctx = canvas.getContext('2d');
+            ctx.fillRect(0, 0, canvas.width, canvas.height)
+            ctx.save();
+            var x = Math.floor(Math.random() * 50);
+            var y = Math.floor(Math.random() * 30) + 10;
+            ctx.translate(x, y);
+            // var rotatedeg = -(Math.floor(Math.random() * arr.length * 10) - 5) * Math.PI / 180;
+            console.log(" " + x + " " + y)
+                // ctx.rotate(rotatedeg);
+            ctx.font = '35px aa'
+            ctx.fillStyle = "#ccc";
+            ctx.textBaseline = "top"
+            ctx.fillText(code, 0, 0);
+            ctx.stroke();
+            ctx.restore();
+        }
+        creatcanvas()
+
+        var codearea = document.getElementById("codearea");
+        var refresh = document.getElementById("refresh");
+        var clear = document.getElementById("clear");
+        var submit = document.getElementById("submit");
+        var arror = document.getElementsByClassName("arror")[0];
+        refresh.onclick = () => {
+            creatcanvas();
+        }
+        codearea.oninput = () => {
+            clear.style.display = "inline-block"
+            var value = codearea.value
+            arror.style.display = "none"
+            for (let i = 0; i < value.length; i++) {
+                if (value[i] != string[i]) {
+                    arror.style.display = "inline-block";
+                    key = false;
+                    return;
+                }
+
+            }
+            key = true;
+        }
+        clear.onclick = () => {
+            codearea.value = "";
+            arror.style.display = "none"
+        }
+        submit.onclick = () => {
+            creatcanvas();
+            if (key) {
+                alert("YES!YES!YES!")
+            } else {
+                alert("no no no")
+            }
+        }
+    </script>
+</body>
+
+</html>

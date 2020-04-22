@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            cursor: pointer;
+            width: 100%;
+            height: 2rem;
+            text-align: center;
+            line-height: 1.2rem;
+            background-color: deeppink;
+            color: #fff;
+            margin-top: 0.2rem;
+        }
+        
+        input {
+            display: none;
+        }
+        
+        label {
+            position: absolute;
+            width: 100%;
+            height: 2rem;
+            background-color: forestgreen;
+            color: ghostwhite;
+            line-height: 2rem;
+            text-align: center;
+        }
+        
+        canvas {
+            margin-top: 10%;
+            max-width: 100%;
+            max-height: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="file" accept="image/*" id="male">
+    <label for="male">点一下  玩一年</label>
+    <canvas></canvas>
+    <div size='1'>高清原画</div>
+    <div size='2'>轻微模糊</div>
+    <div size='4'>比较模糊</div>
+    <div size='10'>开始喽</div>
+    <div size='20'>反正我认不出来</div>
+    <div size='30'>当代梵高</div>
+    <div size="50">究极无敌之电光毒龙钻之虎头蛇尾棒棒捶</div>
+</body>
+<script>
+    var canvas = document.getElementsByTagName('canvas')[0];
+    var ctx = canvas.getContext('2d');
+    var img = new Image();
+    var key = null;
+    if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
+        key = false
+    } else {
+        key = true;
+    }
+
+    function showimg() {
+
+        img.src = url;
+        img.onload = () => {
+            console.log(img.width)
+            if (!key) {
+                canvas.width = img.width;
+                canvas.height = img.height * 2;
+            } else {
+                canvas.width = img.width * 2;
+                canvas.height = img.height;
+            }
+            ctx.drawImage(img, 0, 0)
+        }
+    }
+
+    function imgtrans(size) {
+        var imgdata = ctx.getImageData(0, 0, img.width, img.height);
+        var newimgdata = ctx.createImageData(img.width, img.height)
+        var width = imgdata.width;
+        var height = imgdata.height;
+        for (let i = 0; i < width / size; i++) {
+            for (let j = 0; j < height / size; j++) {
+                color = getpxinfo(imgdata, Math.floor(i * size + size / 2), Math.floor(j * size + size / 2));
+                for (let a = 0; a < size; a++) {
+                    for (let b = 0; b < size; b++) {
+                        setpxinfo(newimgdata, i * size + a, j * size + b, color)
+                    }
+                }
+            }
+        }
+        if (!key) {
+            ctx.putImageData(newimgdata, 0, imgdata.height);
+        } else {
+            ctx.putImageData(newimgdata, imgdata.width, 0);
+        }
+    }
+
+
+    function getpxinfo(img, x, y) {
+        var data = img.data;
+        var w = img.width;
+        var h = img.height;
+        var color = [];
+        color[0] = data[(y * w + x) * 4]
+        color[1] = data[(y * w + x) * 4 + 1]
+        color[2] = data[(y * w + x) * 4 + 2]
+        color[3] = data[(y * w + x) * 4 + 3]
+        return color;
+    }
+
+    function setpxinfo(img, x, y, color) {
+        var data = img.data;
+        var w = img.width;
+        var h = img.height;
+        data[(y * w + x) * 4] = color[0]
+        data[(y * w + x) * 4 + 1] = color[1]
+        data[(y * w + x) * 4 + 2] = color[2]
+        data[(y * w + x) * 4 + 3] = color[3]
+    }
+
+    var file = document.getElementsByTagName("input")[0];
+    let url = null;
+    file.onchange = (e) => {
+        var imgdata = e.target.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(imgdata);
+        reader.onload = function(e) {
+            url = this.result;
+            showimg();
+        }
+    }
+    var divs = document.getElementsByTagName("div");
+    for (let i = 0; i < divs.length; i++) {
+        divs[i].ontouch = () => {
+            var x = parseInt(divs[i].getAttribute("size"));
+            if (url)
+                imgtrans(x);
+            else
+                alert("你坏坏 没传图片")
+        }
+        divs[i].onclick = () => {
+            var x = parseInt(divs[i].getAttribute("size"));
+            if (url)
+                imgtrans(x);
+            else
+                alert("你坏坏 没传图片")
+        }
+
+    }
+</script>
+
+</html>

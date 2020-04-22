@@ -1,0 +1,37 @@
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1584940080652'); /* IE9 */
+  src: url('iconfont.eot?t=1584940080652#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAN4AAsAAAAACAQAAAMrAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDSAqCcIJGATYCJAMYCw4ABCAFhG0HXRsBBxEVnKHIfiTGMSnrDL+K9mjMBM+X27/n7i48Al/MIqJWmWvrUmWIeU0A+NK2J2lJCwmL1G9d+wFviO+GHVyTVyGQt7Y5VpcWDnA8oAFFhD3NSuQnNkHdMHblRVyHAC4ZlEIaNWnVCQeDMU8AGTV8aH+cVBSDYQUHwS7ZakKyEgtHLVd3gRX+9+UrFcQBhaUxlrYb0ngQ9XzXr6bnBfPo5dpZP54bYLtAA6UAAzKr1DsFHWZLoXGV0YYWQBgOCjMWGml+Kb+sXy0ISCmNoBBm/uWBhUGjEBAbWB8GQCucs8B3bamiS4NiGPBLiaHBLyuGAr+a/LaM9ohTooDewGwMeimGKmwUgmWMAMFwR6JMmF1m+nq2OxM/vVPsjLEvXnR9/rwL5x7Ne1ip32Av5A5y1fSZmw8XRO09mGRvOpQffeBIapcIK3LmkP0Xk8ymS4VDD+zoiysekQ7VNVSJWOL1jDQR14MbciMpVm6Zn6Fc0wbVdmZ33dxM+vWT5tK0X/9m0qFdTuucdqtrRme0XtA6lHmxYbl6p6j517Xv9ovrd9eO813DKh41fphyj/b+qNBziTPEWdLzW4Ve4ex6t7n1x6+tM9zlvW8AzAIgCLRogPR+MMJEq+8Q3NI3dF0AnaM+QPBMH9Elf959dLjzuHrfyFr/Hc8A8Hr74HJY1l/aL+egoLXsVzWZouA+mGiuMGy2kTXUKmN5vzg2afe2SAEuLhDAYAzvxzLG37NbcFIyBooQ6aBxyMMYQimw8KgENg51waUkTXd7xDIBjZhiQAkWAxCiOAGKCG6AJop7GEN4BxYJfAebKNHg0kVij/QoEEsb3gRGUVFxUVvOE1sODYPGN+ptMJJU+Iw/xLYJSqMkW3hhgoyxwu51psrEMo/0BLdhGGZaZO5QatSoLnkcc9mDonIenZCbwCgqKi5qy3lit7eGOfTfqLfBSE1HRfIPse3glEZJC8xLO7XquBYkdq8zVSaWeaQncGMwszMt5ZM6lBo1PdJLHqNu3FYbza8fn3If4GKstkWJFiOW2BLCn2GupHSqU9828OJXO3k5hlvMbMaHvA2DLQWYHAcA') format('woff2'),
+  url('iconfont.woff?t=1584940080652') format('woff'),
+  url('iconfont.ttf?t=1584940080652') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('iconfont.svg?t=1584940080652#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-zanting1:before {
+  content: "\e638";
+}
+
+.icon-shengyin:before {
+  content: "\e62f";
+}
+
+.icon-zanting:before {
+  content: "\e62c";
+}
+
+.icon-bofang:before {
+  content: "\e61c";
+}
+
+.icon-fullscreen:before {
+  content: "\e60a";
+}
+

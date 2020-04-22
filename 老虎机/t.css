@@ -1,0 +1,17 @@
+*{ margin:0; padding:0; list-style:none}
+.mod-sub{ background:url(http://img1.91huo.cn/mykd/img/tmp/0420/bg-sub.jpg) no-repeat; width:720px; min-height:900px; position:relative; transform:scale(0.4); transform-origin:0 0}
+.btn-bs{ width:30px; height:117px; background:url(http://img1.91huo.cn/mykd/img/tmp/0420/bs.png) no-repeat; position:absolute; left:656px; top:480px; transform-origin: center bottom; }
+.btn-bs.active{animation:btnBs ease-in 0.3s 2 alternate forwards; }
+@keyframes btnBs{
+    0%{ transform:scaleY(1)}	
+	100%{ transform:scaleY(-0.5)}
+}
+
+.prize li{ width:96px; height:102px; background-image:url(http://img1.91huo.cn/mykd/img/tmp/0420/icon-prize.png); background-repeat:repeat; position:absolute; top:529px; transition: all 3s 0.5s ease-out}
+.prize li:nth-of-type(1){ left:160px }
+.prize li:nth-of-type(2){ left:319px; transition-delay: 0.6s }
+.prize li:nth-of-type(3){ left:480px; transition-delay: 0.7s}
+
+
+.btn-yao,.btn-dis{ width:470px; height:145px; background:url(http://img1.91huo.cn/mykd/img/tmp/0420/btn-yao.png) no-repeat; position:absolute; left:50%; margin-left:-235px; top:690px}
+.btn-dis{ background-position:0 -145px}

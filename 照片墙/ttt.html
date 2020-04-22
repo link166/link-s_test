@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas width="800px" height="800px" id="mycanvas"></canvas>
+</body>
+<script>
+    var img = new Image();
+    img.src = '9.jpg'
+    var canvas = document.getElementById('mycanvas');
+    var ctx = canvas.getContext('2d');
+    img.onload = () => {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        var dataURL = canvas.toDataURL();
+        console.log(dataURL)
+    }
+</script>
+
+</html>

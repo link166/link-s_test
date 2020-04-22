@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        h2,
+        h3 {
+            color: white;
+        }
+        
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            background-color: #db4d6d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-flow: column;
+        }
+        
+        .warp {
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .monsterhome {
+            margin-left: 60px;
+            display: flex;
+            flex-direction: row;
+            margin-top: 20px;
+        }
+        
+        .monster {
+            position: relative;
+            width: 110px;
+            height: 100px;
+            border-radius: 15px;
+            display: inline-block;
+            background-color: #e55a54;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+            animation: jump 0.8s linear infinite alternate;
+        }
+        
+        .monster.blue {
+            animation-delay: 0.4s;
+            background-color: #0c4475;
+        }
+        
+        .monster::before {
+            content: "";
+            width: 20px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-70%) rotate(45deg);
+        }
+        
+        .monster::after {
+            content: "";
+            width: 20px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: rotate(-45deg);
+        }
+        
+        .monster .eye {
+            width: 40%;
+            height: 40%;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .monster .eye .eyeball {
+            width: 50%;
+            height: 50%;
+            background-color: #0c4475;
+            border-radius: 50%;
+            overflow: hidden;
+            animation: eyemove 1.6s linear infinite alternate;
+        }
+        
+        .monster.blue .eye .eyeball {
+            background-color: #e55a54;
+        }
+        
+        .monster .mouth {
+            width: 32px;
+            height: 10px;
+            border-radius: 10px;
+            background-color: #fff;
+            margin-top: 10px;
+        }
+        
+        .monster.blue .mouth {
+            background-color: #e55a54;
+        }
+        
+        @keyframes jump {
+            50% {
+                top: 0;
+                box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+            }
+            100% {
+                top: -50px;
+                box-shadow: 0px 110px 30px rgba(0, 0, 0, 0.4);
+            }
+        }
+        
+        @keyframes eyemove {
+            0%,
+            10% {
+                transform: translateX(50%);
+            }
+            90%,
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        .warp {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #0c4475;
+            ;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 1;
+            transition: 2s;
+        }
+        
+        .warp .loading {
+            width: 150px;
+            height: 10px;
+            border-radius: 15px;
+            background-color: #fff;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        
+        .warp .monster {
+            transition: 2s;
+        }
+        
+        .warp .loading .bar {
+            height: 10px;
+            background-color: #e55a54;
+        }
+        
+        .warp.hid {
+            opacity: 0;
+        }
+        
+        .warp.hid .monster {
+            transform: rotateZ(360deg) scale(0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="warp">
+        <div class="monster">
+            <div class="eye">
+                <div class="eyeball"></div>
+            </div>
+            <div class="mouth"></div>
+        </div>
+        <div class="loading">
+            <div class="bar">
+
+            </div>
+        </div>
+    </div>
+    <div class="inner">
+        <h2 class="monstertext">hello <br> there</h2>
+        <h3>we will eat you</h3>
+    </div>
+    <div class="monsterhome">
+        <div class="monster">
+            <div class="eye">
+                <div class="eyeball"></div>
+            </div>
+            <div class="mouth"></div>
+        </div>
+        <div class="monster blue">
+            <div class="eye">
+                <div class="eyeball"></div>
+            </div>
+            <div class="mouth"></div>
+        </div>
+    </div>
+    <script>
+        var bar = document.querySelector(".warp .loading .bar");
+        var width = 0;
+        var j = setInterval(() => {
+            width += 1;
+            bar.style.width = width + '%'
+            if (width == 100) {
+                clearInterval(j);
+                setTimeout(() => {
+                    document.querySelector(".monstertext").innerHTML = "<h2>LOOK <br> AT <br> ME</h2>";
+                }, 3000)
+                document.querySelector(".warp ").className += ' hid'
+            }
+        }, 20)
+    </script>
+</body>
+
+</html>

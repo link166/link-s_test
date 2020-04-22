@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="warp">
+
+    </div>
+    <script src="jquery-3.4.1.min.js"></script>
+    <script src="t.js"></script>
+    <script>
+        var warp = $(".warp");
+        var arr = [];
+        for (let i = 1; i < 10; i++) {
+            arr.push((i + '.jpg'));
+        }
+
+        arr = arr.concat(arr)
+        width = 200;
+        createwall(arr, warp, width)
+    </script>
+</body>
+
+</html>

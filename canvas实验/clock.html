@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        canvas {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="400px" height="400px"></canvas>
+    <script>
+        var canvas = document.getElementsByTagName('canvas')[0];
+        var ctx = canvas.getContext('2d')
+        var deg = Math.PI / 180;
+        var date = new Date();
+        var hnum = date.getHours();
+        var mnum = date.getMinutes();
+        var snum = date.getSeconds();
+
+        ctx.translate(200, 200);
+
+        function drawclock() {
+            ctx.save();
+            ctx.lineWidth = 7;
+            ctx.fillStyle = "#fff"
+            ctx.beginPath();
+            ctx.arc(0, 0, 140, 0 * deg, 360 * deg);
+            ctx.fill()
+            ctx.stroke();
+            ctx.restore();
+            for (let i = 0; i < 12; i++) {
+                ctx.save();
+                ctx.rotate(i * 30 * deg)
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(0, -120);
+                ctx.lineTo(0, -140);
+                ctx.stroke();
+                ctx.restore();
+            }
+            for (let i = 0; i < 60; i++) {
+                if (i % 5 != 0) {
+                    ctx.save();
+                    ctx.rotate(i * 6 * deg)
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.moveTo(0, -130);
+                    ctx.lineTo(0, -140);
+                    ctx.stroke();
+                    ctx.restore();
+                }
+            }
+        }
+
+        function draw(type) {
+            //draw hour
+            ctx.save();
+            ctx.lineWidth = "4";
+            if (type == 'hour') {
+                ctx.rotate(hnum * 30 * deg + mnum * 0.5 * deg);
+            } else if (type == 'min') {
+                ctx.rotate(mnum * 6 * deg);
+            } else {
+                ctx.rotate(snum * 6 * deg);
+                ctx.strokeStyle = "#f00";
+            }
+            ctx.beginPath();
+            if (type == 'hour') {
+                ctx.moveTo(0, 20);
+                ctx.lineTo(0, -50);
+            } else if (type == 'min') {
+                ctx.moveTo(0, 20);
+                ctx.lineTo(0, -100);
+            } else {
+                ctx.moveTo(0, 20);
+                ctx.lineTo(0, -120);
+            }
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        drawclock()
+        draw('hour');
+        draw('min')
+        draw('sec')
+
+        setInterval(() => {
+            ctx.clearRect(-200, -200, 400, 400);
+            snum++;
+            if (snum >= 60) {
+                snum = 0;
+                mnum++;
+            }
+            if (mnum >= 60) {
+                mnum = 0;
+                hnum++;
+            }
+            if (hnum >= 60) {
+                hnum = 0;
+                snum = date.getSeconds();
+            }
+            drawclock()
+            draw('hour');
+            draw('min')
+            draw('sec')
+        }, 1000)
+    </script>
+</body>
+
+</html>

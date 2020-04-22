@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column nowrap;
+}
+
+#mycanvas {
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px rgb(0, 0, 0);
+    margin-bottom: 20px;
+}
+
+#type-btn {
+    width: 800px;
+    list-style: none;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-flow: row nowrap;
+}
+
+#type-btn>li {
+    min-width: 70px;
+    border-radius: 5px;
+    background-color: yellow;
+    padding: 5px;
+    margin-right: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#type-btn>li>input[type='color'] {
+    padding: 0;
+}
+
+.xp {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 1px solid black;
+}
+
+#cleararea.checked {
+    background-color: blanchedalmond;
+}
